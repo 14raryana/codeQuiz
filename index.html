@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css"/>
+  </head>
+  
+  <body>
+  
+    <div class="wrapper">
+      <header>
+        <div class="container">
+          <div class="row">
+            <div class="col-10">
+        <h1>Coding Quiz Challenge</h1>
+            </div>
+            <div class="col-2">
+              <h3 id="timer"></h3>
+            </div>
+          </div>
+          
+        </div>
+      </header>
+      <div class="card">
+        <div class="card-header">
+          <h2></h2>
+        </div>
+        <div class="card-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <div id="startQuizAlign">
+                <button id="startQuiz" class="btn" data-toggle="tooltip" title="Previous Password">Start Quiz</button>
+                </div>
+                <div id="answers"></div>
+                <div id="nextQuestionAlign">
+                <button id="nextQuestion">Next Question</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="card-footer"> -->
+          <!-- <button id="generate" class="btn">Generate Password</button><br> -->
+        <!-- </div> -->
+      </div>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <script src="https://kit.fontawesome.com/8509c691cf.js" crossorigin="anonymous"></script>
+  </body>
+</html>
