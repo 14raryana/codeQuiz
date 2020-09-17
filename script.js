@@ -15,6 +15,11 @@ var questions = [
         question: "Where is the correct place to insert a JavaScript?",
         choices: ["Both the <head> section and the <body> section are correct", "the <body> section", "The <head> section"],
         answer: "the <body> section"
+    },
+    {
+        question: "The external JavaScript file must contain the <script> tag.",
+        choices: ["True", "False"],
+        answer: "False"
     }
 ]
 
@@ -28,7 +33,7 @@ $("#startQuiz").on("click", function() {
 
 $("#nextQuestion").on("click", function(){
     questionNumber++;
-    $("#answers").empty();
+    $("#answerList").empty();
     question();
 });
 
@@ -46,20 +51,20 @@ function timerSecondsFunction() {
 function question() {
     $("h2").text("Question " + parseInt(questionNumber + 1));
     $("#currentQuestion").text(questions[questionNumber].question);
-    for (var i = 0; i < questions[questionNumber].choices.length; i++) {
-    var answerButtons = $("<button>").css("text-align", "left");
-    answerButtons.addClass("btn");
-    $("#answers").append(i+1 + ")")
-    answerButtons.append(answerButtons.text(questions[questionNumber].choices[i]));
-    $("#answers").append(answerButtons);
-    $("#answers").append("<br>");
-    }
+    
+    // var answerList = $("#answers").append("<ol></ol>");
+    // answerList.attr("id", "answerList");
+    $("#answerList").attr("type","A")
 
-    // var answerButtons = $("<button>");
-    // answerButtons.addClass("btn");
-    // answerButtons.append(answerButtons.text(questions[0].choices[1]));
-    // $("#answers").append(answerButtons);
-    // $("#answers").append(answerButtons.text(questions[0].choices[0]));
-    // $("#answers").append(answerButtons.text(questions[0].choices[1]));
+    for (var i = 0; i < questions[questionNumber].choices.length; i++) {
+        var answerButtons = $("<button>").css("text-align", "left");
+        answerButtons.addClass("btn");
+        // $("#answers").append(i+1 + ")")
+        answerButtons.append(answerButtons.text(questions[questionNumber].choices[i]));
+        $("#answerList").append("<li></li>");
+        $("li:last").append(answerButtons);
+        // $(answerListItem).append(answerButtons);
+        // $("#answers").append("<br>");
+    }
 }
 
