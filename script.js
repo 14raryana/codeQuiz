@@ -45,6 +45,7 @@ function timerSecondsFunction() {
 
 function question() {
     $("h2").text("Question " + parseInt(questionNumber + 1));
+    $("#currentQuestion").text(questions[questionNumber].question);
     for (var i = 0; i < questions[questionNumber].choices.length; i++) {
     var answerButtons = $("<button>").css("text-align", "left");
     answerButtons.addClass("btn");
