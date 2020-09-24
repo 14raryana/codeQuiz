@@ -6,6 +6,8 @@ var correctAnswersCount = 0;
 var wrongAnswersCount = 0;
 var calculatedScore;
 $("#startQuizAlign").css("text-align", "center");
+$("#highScoreDisplay").append(localStorage.getItem("score"));
+var response = $("#response");
 
 var questions = [
     {
@@ -57,54 +59,70 @@ function countDownFunction() {
 function nextQuestion() {
     questionNumber++;
     $("#answerList").empty();
-    question();
+    if(questionNumber == questions.length) {
+        timerSeconds = 0;
+    }
+    // $("#currentQuestion").empty();
+    // $("#heading").empty();
+    else {
+        question();
+    }
 }
 
 function question() {
-    $("h2").text("Question " + parseInt(questionNumber + 1));
-    $("#currentQuestion").text(questions[questionNumber].question);
-    
-    // var answerList = $("#answers").append("<ol></ol>");
-    // answerList.attr("id", "answerList");
-    $("#answerList").attr("type","A");
 
-    var currentQuestion = questions[questionNumber];
+    // if(questionNumber == questions.length) {
+    //     timerSeconds = 0;
+    // }
 
-    for (var i = 0; i < questions[questionNumber].choices.length; i++) {
-        var answerButtons = $("<button>").css("text-align", "left");
-        answerButtons.addClass("btn hello");
-        // answerButtons.attr("data-answer", questions[questionNumber].choices[i]);
-        answerButtons.attr("id",questions[questionNumber].choices[i]);
-        // answerButtons.attr("onclick","hello(this.id)");
-        // $("#answers").append(i+1 + ")")
-        answerButtons.text(questions[questionNumber].choices[i]);
-        $("#answerList").append("<li></li>");
-        $("li:last").append(answerButtons);
-        // $(answerListItem).append(answerButtons);
-        // $("#answers").append("<br>");
-        // console.log(answerButtons.attr("id"));
-    }
-    
+    // else {
+        $("h2").text("Question " + parseInt(questionNumber + 1));
+        $("#currentQuestion").text(questions[questionNumber].question);
+        
+        // var answerList = $("#answers").append("<ol></ol>");
+        // answerList.attr("id", "answerList");
+        $("#answerList").attr("type","A");
 
-    $(".hello").click(function(event) {
-        // var mySelf = $(this);
-        alert(event.currentTarget.id);
-        if(event.currentTarget.id == questions[questionNumber].answer) {
-            alert("correct");
-            correctAnswersCount++;
-            alert(correctAnswersCount);
+        var currentQuestion = questions[questionNumber];
+
+        for (var i = 0; i < questions[questionNumber].choices.length; i++) {
+            var answerButtons = $("<button>").css("text-align", "left");
+            answerButtons.addClass("btn hello");
+            // answerButtons.attr("data-answer", questions[questionNumber].choices[i]);
+            answerButtons.attr("id",questions[questionNumber].choices[i]);
+            // answerButtons.attr("onclick","hello(this.id)");
+            // $("#answers").append(i+1 + ")")
+            answerButtons.text(questions[questionNumber].choices[i]);
+            $("#answerList").append("<li></li>");
+            $("li:last").append(answerButtons);
+            // $(answerListItem).append(answerButtons);
+            // $("#answers").append("<br>");
+            // console.log(answerButtons.attr("id"));
         }
-        else {
-            alert("wrong");
-            timerSeconds -= 10;
-            wrongAnswersCount++;
-            alert(wrongAnswersCount);
-        }
-        nextQuestion();
-        // alert("you clicked a button " + answerButtons.attr("id"));
-        // alert(answerButtons.text($(this).attr("data-answer")));
-        // alert(answerButtons.attr("id"));
-    });
+        
+
+        $(".hello").click(function(event) {
+            // var mySelf = $(this);
+            // alert(event.currentTarget.id);
+            if(event.currentTarget.id == questions[questionNumber].answer) {
+                alert("correct");
+                correctAnswersCount++;
+                // alert(correctAnswersCount);
+                nextQuestion();
+            }
+            else {
+                alert("Incorrect");
+                timerSeconds -= 10;
+                wrongAnswersCount++;
+                // alert(wrongAnswersCount);
+                nextQuestion();
+            }
+            // nextQuestion();
+            // alert("you clicked a button " + answerButtons.attr("id"));
+            // alert(answerButtons.text($(this).attr("data-answer")));
+            // alert(answerButtons.attr("id"));
+        });
+    // }
 }
 
 function calculateScore() {
@@ -114,11 +132,12 @@ function calculateScore() {
 function scoreBoard() {
     $(".card").empty();
     calculateScore();
+    localStorage.setItem("score", calculatedScore);
     var scoreBoardDiv = $("<div class = 'card-body'>");
     var scoreBoardTitle = $("<h2> High Scores</h2>").css("text-align","center");
     scoreBoardTitle.addClass("card-header");
     // scoreBoardDiv.append("<div class = 'container'>").append("<div class = 'row'>").append("<div class = 'col-6'>").append("<div class = 'col-6'>");
-    var score = $("<p>" + localStorage.getItem("initials") + " " + calculatedScore + "</p>");
+    var score = $("<p>" + localStorage.getItem("initials") + " - " + calculatedScore + "</p>");
     score.css("margin-top", "3%");
     scoreBoardDiv.append(scoreBoardTitle);
     scoreBoardDiv.append(score);
