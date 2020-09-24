@@ -8,6 +8,10 @@ var calculatedScore;
 $("#startQuizAlign").css("text-align", "center");
 $("#highScoreDisplay").append(localStorage.getItem("score"));
 var response = $("#response");
+// var highScoreArray = [];
+// var highScoreInfo;
+$("#instructions").append("<h3>Instructions: <br>");
+$("#instructions").append("<p>When you press the start button a timer will begin and you will be presented with a series of basic javascript questions. Everytime you answer you will be told if you got it right or wrong. If you answer a question incorrectly time will be subtracted from your timer. Goodnight and Good luck!")
 
 var questions = [
     {
@@ -29,11 +33,35 @@ var questions = [
     }
 ];
 
+function clearResponse() {
+    $("#response").empty();
+}
+
+
 
 $("#startQuiz").on("click", function() {
     $(".card-header").show();
     $("#startQuiz").hide();
+    $("#instructions").hide();
     $("#timer").text(timerSeconds);
+
+    // highScoreInfo = {
+    //     initials: "RA",
+    //     score: "10"
+    // }
+    // highScoreArray.push(highScoreInfo);
+
+    // // highScoreInfo = {
+    // //     initials: "JA",
+    // //     score: "50"
+    // // }
+    // // highScoreArray.push(highScoreInfo);
+    // localStorage.setItem("allScores", highScoreArray[0].initials);
+    // console.log(highScoreArray);
+    // // console.log(highScoreArray[1].score)
+
+
+
     timer = setInterval(countDownFunction,1000);
     question();
 });
@@ -105,16 +133,20 @@ function question() {
             // var mySelf = $(this);
             // alert(event.currentTarget.id);
             if(event.currentTarget.id == questions[questionNumber].answer) {
-                alert("correct");
+                // alert("correct");
                 correctAnswersCount++;
                 // alert(correctAnswersCount);
+                $("#response").append("<p style='color:green; font-size:40px;'>Correct!</p>");
+                setTimeout(clearResponse, 1000);
                 nextQuestion();
             }
             else {
-                alert("Incorrect");
+                // alert("Incorrect");
                 timerSeconds -= 10;
                 wrongAnswersCount++;
                 // alert(wrongAnswersCount);
+                $("#response").append("<p style='color:red; font-size:40px;'>Incorrect!</p>");
+                setTimeout(clearResponse, 1000);
                 nextQuestion();
             }
             // nextQuestion();
